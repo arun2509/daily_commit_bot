@@ -1,14 +1,14 @@
-workflow_code = """
 name: Daily Commit Workflow
 
 on:
   schedule:
-    - cron: '30 4 * * *'
-  workflow_dispatch:
+    - cron: '30 4 * * *'  # Runs every day at 4:30 AM UTC
+  workflow_dispatch:      # Allow manual trigger
 
 jobs:
   commit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,7 +23,3 @@ jobs:
           git add daily-log.txt
           git commit -m "Automated daily commit"
           git push
-"""
-
-with open(".github/workflows/daily-commit.yml", "w") as f:
-    f.write(workflow_code)
